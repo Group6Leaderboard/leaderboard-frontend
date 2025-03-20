@@ -1,11 +1,11 @@
-/* Full Page Layout */
+
 html, body {
   height: 100%;
   margin: 0;
   font-family: Arial, sans-serif;
 }
 
-/* Main Container */
+
 .login-container {
   display: flex;
   justify-content: center;
@@ -15,7 +15,6 @@ html, body {
   position: relative;
 }
 
-/* Left and Right Background */
 .left-half, .right-half {
   position: absolute;
   top: 0;
@@ -34,7 +33,7 @@ html, body {
   background-color: #FFF2D7;
 }
 
-/* Competition Title */
+
 .competition-title {
   position: absolute;
   top: 4%;
@@ -54,7 +53,7 @@ html, body {
   font-weight: bold;
 }
 
-/* Login Box */
+
 .login-box {
   background-color: #FFF2D7;
   width: 850px;
@@ -66,7 +65,7 @@ html, body {
   z-index: 1;
 }
 
-/* Left Side of Login Box */
+
 .login-left {
   flex: 1;
   background-color: #FFF2D7;
@@ -88,7 +87,6 @@ html, body {
   border-radius: 5px;
 }
 
-/* Right Side of Login Box */
 .login-right {
   flex: 1;
   padding: 20px;
@@ -98,7 +96,7 @@ html, body {
   text-align: center;
 }
 
-/* Input Styling */
+
 .input-group {
   margin-bottom: 1rem;
   text-align: left;
@@ -117,7 +115,7 @@ html, body {
   border-radius: 5px;
 }
 
-/* Login Button */
+
 .login-btn {
   width: 100%;
   background-color: #F6A58C;
