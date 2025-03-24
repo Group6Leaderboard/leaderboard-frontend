@@ -1,6 +1,6 @@
 .container {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 90%;
+  margin: 20px auto;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
@@ -9,18 +9,13 @@
 
 .title {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: #02414B;
   font-weight: 600;
+  font-size: 22px;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Image Section Styles */
+/* Image Section */
 .imageSection {
   display: flex;
   flex-direction: column;
@@ -29,25 +24,19 @@
 }
 
 .profileImage {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   overflow: hidden;
-  position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 3px solid #5EB5AE;
+  border: 2px solid #5EB5AE;
 }
 
 .profileImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.imageUpload {
-  display: flex;
-  justify-content: center;
 }
 
 .uploadButton {
@@ -57,9 +46,10 @@
   padding: 8px 16px;
   background-color: #5EB5AE;
   color: white;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 14px;
+  transition: background 0.3s ease;
 }
 
 .uploadButton:hover {
@@ -70,34 +60,47 @@
   display: none;
 }
 
-/* Form Fields Styles */
-.formFields {
+/* Form Styling */
+.form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
+  padding-right: 10px;
 }
 
 .formGroup label {
   font-weight: 600;
-  color: #555;
+  color: #333;
   font-size: 14px;
 }
 
-.inputField, .textareaField {
-  padding: 12px;
+.inputField,
+.textareaField {
+  padding: 10px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 14px;
+  width: 100%;
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
 }
 
-.inputField:focus, .textareaField:focus {
+
+
+.inputField:focus,
+.textareaField:focus {
   outline: none;
   border-color: #5EB5AE;
   box-shadow: 0 0 0 2px rgba(94, 181, 174, 0.2);
@@ -105,14 +108,14 @@
 
 .textareaField {
   resize: vertical;
-  min-height: 100px;
+  min-height: 80px;
 }
 
-/* Password Specific Styles */
+/* Password Fields */
 .passwordInput {
-  position: relative;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .passwordInput .inputField {
@@ -140,7 +143,7 @@
   padding: 10px;
   background-color: #f0f0f0;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   color: #555;
   font-weight: 500;
@@ -154,17 +157,20 @@
 /* Form Actions */
 .formActions {
   display: flex;
-  gap: 15px;
-  margin-top: 10px;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.saveButton, .cancelButton {
-  padding: 12px 24px;
+.saveButton,
+.cancelButton {
+  padding: 12px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   font-weight: 600;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
+  font-size: 14px;
 }
 
 .saveButton {
@@ -186,26 +192,54 @@
   background-color: #e0e0e0;
 }
 
-/* Responsive Styles */
+/* Responsive Design */
 @media screen and (min-width: 768px) {
+  .container {
+    max-width: 600px;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .formActions {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 700px;
+  }
+
   .form {
     flex-direction: row;
     align-items: flex-start;
   }
-  
+
   .imageSection {
-    flex: 0 0 250px;
+    flex: 0 0 200px;
     margin-right: 30px;
     margin-bottom: 0;
   }
-  
+
+  .profileImage {
+    width: 140px;
+    height: 140px;
+  }
+
+  .uploadButton {
+    font-size: 15px;
+    padding: 10px 18px;
+  }
+
   .formFields {
     flex: 1;
   }
-}
 
-@media screen and (max-width: 767px) {
   .formActions {
-    flex-direction: column;
+    justify-content: flex-end;
   }
 }

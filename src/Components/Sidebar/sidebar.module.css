@@ -1,52 +1,119 @@
 @import url("https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;700&display=swap");
+
 .sidebar {
     width: 250px;
     background-color: white;
     color: black;
     box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.1);
-  font-family: "Inknut Antiqua", serif;
-  }
-  
-  
-  .logo {
-    width: 200px;
-    height: 200px;
-    cursor: pointer; 
-  }
-  img{
-    margin-top: -40px;
-  }
-/* ✅ Competition info appears below logo */
-.competitionInfo {
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.05);
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    margin-bottom: 15px;
-  }
-  
-   ul{
-    gap: 15px;
-   }
-  .navLink {
-    color: black !important;
+    font-family: "Inknut Antiqua", serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     padding: 20px;
+    transition: all 0.3s ease-in-out;
+}
+ul, ol {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 70px;
+        padding: 10px;
+        align-items: center;
+    }
+    
+    .nav span {
+        display: none;
+    }
+
+    .logo {
+        width: 50px;
+        margin-bottom: 10px;
+    }
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto 20px auto; 
+}
+
+.nav {
+  list-style: none !important;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  list-style: none !important;
+  display: flex; /* Ensures it behaves like a flex container */
+  align-items: center; /* Aligns items properly */
+}
+
+.nav-item::marker {
+  content: none !important; /* Ensures marker is removed */
+  display: none !important;
+}
+
+
+
+.navLink {
+    display: flex;
+    align-items: center;
+    color: black !important;
+    padding: 12px 15px;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
-  }
-  
-  .navLink:hover {
+    text-decoration: none; 
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.navLink:hover {
     background-color: #ebf0f3;
-  }
-  
-  .active {
+    padding-left: 18px;
+}
+
+.active {
     font-weight: bold;
     color: #5EB5AE !important;
-  }
-  
-  .arrowIcon {
+    background-color: rgba(94, 181, 174, 0.1);
+}
+
+.navLink svg {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.arrowIcon {
     color: #5EB5AE;
     transition: transform 0.3s ease-in-out;
-  }
-  
+    font-size: 14px;
+    margin-left: auto;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        padding: 15px;
+    }
+
+    .logo {
+        width: 120px;
+    }
+
+    .navLink {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .navLink svg {
+        font-size: 18px;
+    }
+}
