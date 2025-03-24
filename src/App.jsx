@@ -1,7 +1,11 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-import AppRoutes from "./routes/AppRoutes";
-import Sidebar from "./Components/Sidebar/Sidebar";
+import { Routes, Route } from "react-router-dom";
+import DashboardLayout from "./Layouts/Dashboard/DashboardLayout"; // Import DashboardLayout
+import AdminDashboard from "./Pages/AdminDashboard";
+// import MentorDashboard from "./Pages/MentorDashboard";
+// import StudentDashboard from "./Pages/StudentDashboard";
+// import CollegeDashboard from "./Pages/CollegeDashboard";
+import AssignForm from "./Components/AssignForm/AssignForm";
 
 const App = () => {
   const location = useLocation(); 
@@ -9,15 +13,21 @@ const App = () => {
   
 
   return (
-    <div className="d-flex">
-      {/* Conditionally Render Sidebar */}
-      {!hideSidebarRoutes.includes(location.pathname) && <Sidebar />}
+    <DashboardLayout>
+    <Routes>
+    <Route path="/admin" element={<AdminDashboard />} />
+    <Route path="/admin/assign-project" element={<AssignForm role="admin" />} />
+        {/* <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/assign-project" element={<AssignForm role="admin" />} />
 
-      {/* Main Content */}
-      <div className="flex-grow-1 p-3">
-        <AppRoutes /> 
-      </div>
-    </div>
+        <Route path="/mentor" element={<MentorDashboard />} />
+        <Route path="/mentor/assign-task" element={<AssignForm role="mentor" />} />
+
+        <Route path="/student" element={<StudentDashboard />} />
+        <Route path="/college" element={<CollegeDashboard />} /> */}
+ 
+    </Routes>
+    </DashboardLayout>
   );
 };
 
