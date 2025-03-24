@@ -8,6 +8,10 @@ import AdminDashboard from "./Pages/AdminDashboard";
 import AssignForm from "./Components/AssignForm/AssignForm";
 
 const App = () => {
+  const location = useLocation(); 
+  const hideSidebarRoutes = ["/login","/students","/colleges","/projects"]; 
+  
+
   return (
     <DashboardLayout>
     <Routes>
