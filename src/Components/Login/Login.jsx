@@ -1,40 +1,76 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styles from "./Login.module.css"; 
-import logo from "../../assets/logog-Photoroom.png";
 import bgImage from "../../assets/logog.webp";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Logging in with:", username, password);
+    setError(""); 
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/auth/login",
+        { email, password },
+        { 
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (response.data.message === "Success") {
+        const { token, role } = response.data.response; 
+        
+        localStorage.setItem("token", token);
+        localStorage.setItem("role", role);
+
+        // Redirect user based on role
+        if (role === "ADMIN") {
+          navigate("/admin/dashboard");
+        } else if (role === "MENTOR") {
+          navigate("/mentor/dashboard");
+        } else if (role === "STUDENT") {
+          navigate("/student/dashboard");
+        } else {
+          navigate("/"); // Default route if role is unknown
+        }
+      } else {
+        setError("Invalid credentials. Please try again.");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+
+      // Handle invalid credentials
+      if (err.response && err.response.status === 404) {
+        setError("Invalid credentials. Please try again.");
+      } else {
+        setError("Login failed. Check your connection and try again.");
+      }
+    }
   };
 
   return (
     <div className={styles.loginContainer}>
-      
-      <div className={styles.leftHalf} style={{ backgroundImage: `url(${bgImage})` }}>
-        
-      </div>
+      <div className={styles.leftHalf} style={{ backgroundImage: `url(${bgImage})` }}></div>
 
-     
       <div className={styles.rightHalf}>
         <div className={styles.loginBox}>
-          <div className={styles.logoSection}>
-            <img src={logo} alt="Inspiro Logo" className={styles.logo} />
-          </div>
           <div className={styles.welcomeBack}>
             <h2>Welcome Back!</h2>
           </div>
+          {error && <p className={styles.errorMessage}>{error}</p>}
           <form onSubmit={handleLogin}>
             <div className={styles.inputGroup}>
-              <label>Username</label>
+              <label>Email</label>
               <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>

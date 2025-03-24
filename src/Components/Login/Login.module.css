@@ -1,67 +1,62 @@
-/* Main container */
+
 .loginContainer {
     display: flex;
     height: 100vh;
     width: 100vw;
   }
   
-  /* Left Half - Background Image */
   .leftHalf {
     flex: 1;
     background-size: cover;
     background-position: center;
   }
   
-  /* Right Half - Form */
   .rightHalf {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f5f5eb;
-    padding: 20px;
+    padding: 10px;
     transition: background-image 0.3s ease-in-out;
   }
   
-  /* Login Form Box */
   .loginBox {
     background-color: #e2e2d1;
-    width: 100%;
-    max-width: 400px;
-    padding: 30px;
+    width: 90%; /* Adjusts to screen size */
+    max-width: 350px; /* Smaller width for compact look */
+    max-height: 450px; /* Prevents it from stretching */
+    padding: 25px; /* Slightly reduced padding */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
   }
-  
-  /* Logo Section */
+
   .logoSection {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
   .logo {
-    width: 150px;
+    width: 120px;
     height: auto;
   }
   
-  /* Welcome Text */
   .welcomeBack h2 {
     font-size: 1.8rem;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: 300;
   }
   
-  /* Input Fields */
   .inputGroup {
-    margin-bottom: 1.5rem;
+    margin-bottom: 8px;
     text-align: left;
   }
   
   .inputGroup label {
     display: block;
     font-weight: 300;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
   }
   
   .inputGroup input {
@@ -72,13 +67,12 @@
     font-size: 1rem;
     box-sizing: border-box;
   }
-  
-  /* Login Button */
   .loginBtn {
-    width: 100%;
+    margin-top: 10px;
+    width: 80%;
     background-color: #5EB5AE;
     color: white;
-    padding: 12px;
+    padding: 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
