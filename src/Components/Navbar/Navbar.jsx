@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaSearch, FaUserCircle, FaCaretDown, FaSignOutAlt } from "react-icons/fa";
+import { FaSearch, FaUserCircle, FaCaretDown, FaSignOutAlt, FaUser } from "react-icons/fa";
+import ProfileEdit from "../ProfileEdit/ProfileEdit";
 import styles from "./navbar.module.css";
 
-const Navbar = () => {
+const Navbar = ({ userType, userData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const dropdownRef = useRef(null);
   const mobileMenuRef = useRef(null);
+  const searchInputRef = useRef(null);
+  const modalRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -17,24 +22,33 @@ const Navbar = () => {
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
         setIsMobileMenuOpen(false);
       }
-    };
+    
 
     if (isOpen || isMobileMenuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      setIsProfileModalOpen(false);
+    }
+  };
+
+  if (isOpen || isProfileModalOpen) {
+    document.addEventListener("mousedown", handleClickOutside);
+  }
+
+
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOpen, isMobileMenuOpen]);
-
+  }, [isOpen, isMobileMenuOpen, isProfileModalOpen]);
   return (
+    <>
     <nav className={styles.navbar}>
       <div className={styles.logo}>
-        {/* Logo or brand can go here if needed */}
       </div>
 
-      {/* Desktop view (No changes) */}
       <div className={styles.desktopRightSection}>
         <div className={styles.searchBar}>
           <FaSearch className={styles.searchIcon} />
@@ -51,20 +65,30 @@ const Navbar = () => {
             <FaCaretDown className={styles.dropdownIcon} />
             {isOpen && (
               <ul className={styles.dropdownMenu}>
-                <li>Profile</li>
-                <li>Settings</li>
-                <li>Logout</li>
+                <li onClick={() => setIsProfileModalOpen(true)}>
+                  <FaUser className={styles.menuIcon} />Profile</li>
+               
+                <li>
+                <FaSignOutAlt className={styles.menuIcon} />
+                  Logout</li>
               </ul>
             )}
           </div>
         </div>
       </div>
 
-      {/* Mobile view (Updated: Logout Icon instead of Hamburger, Search on Left) */}
       <div className={styles.mobileTopBar}>
-        <div className={styles.mobileSearchIcon}>
+      <div 
+          className={styles.mobileSearchIcon} 
+          onClick={() => setShowMobileSearch(!showMobileSearch)}
+        >
           <FaSearch />
         </div>
+        {showMobileSearch && (
+          <div className={styles.mobileSearchBar} ref={searchInputRef}>
+            <input type="text" placeholder="Search..." className={styles.mobileSearchInput} autoFocus />
+          </div>
+        )}
         <div className={styles.mobileUserInfo}>
           <FaUserCircle className={styles.mobileProfileIcon} />
           <span className={styles.mobileUsername}>John Doe</span>
@@ -79,6 +103,17 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
+    {isProfileModalOpen && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent} ref={modalRef}>
+            <button className={styles.closeButton} onClick={() => setIsProfileModalOpen(false)}>
+              ✖
+            </button>
+            <ProfileEdit userType={userType} userData={userData} />
+          </div>
+        </div>
+      )}
+    </> 
   );
 };
 

@@ -172,9 +172,9 @@ const ProfileEdit = ({ userType, userData }) => {
                     className={styles.eyeButton}
                   >
                     {passwordVisibility.oldPassword ? (
-                      <EyeOff size={20} />
-                    ) : (
                       <Eye size={20} />
+                    ) : (
+                      <EyeOff size={20} />
                     )}
                   </button>
                 </div>
@@ -197,9 +197,9 @@ const ProfileEdit = ({ userType, userData }) => {
                     className={styles.eyeButton}
                   >
                     {passwordVisibility.newPassword ? (
-                      <EyeOff size={20} />
-                    ) : (
                       <Eye size={20} />
+                    ) : (
+                      <EyeOff size={20} />
                     )}
                   </button>
                 </div>
@@ -222,9 +222,9 @@ const ProfileEdit = ({ userType, userData }) => {
                     className={styles.eyeButton}
                   >
                     {passwordVisibility.confirmPassword ? (
-                      <EyeOff size={20} />
-                    ) : (
                       <Eye size={20} />
+                    ) : (
+                      <EyeOff size={20} />
                     )}
                   </button>
                 </div>
