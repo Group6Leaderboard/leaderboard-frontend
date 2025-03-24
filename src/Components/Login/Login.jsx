@@ -1,5 +1,7 @@
 import { useState } from "react";
-import "./Login.css"; 
+import styles from "./Login.module.css"; 
+import logo from "../../assets/logog-Photoroom.png";
+import bgImage from "../../assets/logog.webp";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -11,26 +13,23 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className={styles.loginContainer}>
       
-      <div className="left-half"></div>
-      <div className="right-half"></div>
-
-      
-      <div className="competition-title">
-        <h1>Inspiro</h1>
-        <p>Inter College Competition</p>
+      <div className={styles.leftHalf} style={{ backgroundImage: `url(${bgImage})` }}>
+        
       </div>
 
      
-      <div className="login-box">
-        <div className="login-left">
-          <img src="w.png" alt="Competition" className="login-image" />
-        </div>
-        <div className="login-right">
-          <img src="login.png" className="login" />
+      <div className={styles.rightHalf}>
+        <div className={styles.loginBox}>
+          <div className={styles.logoSection}>
+            <img src={logo} alt="Inspiro Logo" className={styles.logo} />
+          </div>
+          <div className={styles.welcomeBack}>
+            <h2>Welcome Back!</h2>
+          </div>
           <form onSubmit={handleLogin}>
-            <div className="input-group">
+            <div className={styles.inputGroup}>
               <label>Username</label>
               <input
                 type="text"
@@ -39,7 +38,7 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="input-group">
+            <div className={styles.inputGroup}>
               <label>Password</label>
               <input
                 type="password"
@@ -48,7 +47,7 @@ const Login = () => {
                 required
               />
             </div>
-            <button type="submit" className="login-btn">Login</button>
+            <button type="submit" className={styles.loginBtn}>Login</button>
           </form>
         </div>
       </div>
