@@ -6,18 +6,33 @@
     margin: auto;
   }
 
-.statsContainer {
+  .statsContainer {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    gap: 50px;
-    box-shadow: 0px  4px 8px rgba(0, 0, 0, 0.1);
-padding: 15px;
+    justify-content: center; /* Centers the cards */
+    align-items: center; /* Aligns text vertically */
+    flex-wrap: wrap; /* Ensures responsiveness */
+    margin-bottom: 15px;
+    gap: 40px;
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   }
+  .statsCardTitle {
+    margin-bottom: 55px; /* Reduce gap */
+    font-size: 16px; /* Adjust title size */
+    font-weight: 500;
+    color: #555; /* Slightly dim to create contrast */
+  }
+  
+  .statsCardValue {
+    font-size: 22px; /* Make the value stand out */
+    font-weight: bold;
+    color: #333;
+  }
+
 .formContainer {
     max-width: 4000px;  
     margin: auto;
-    padding: 40px;
+    padding-left: 30px;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0px  4px 8px rgba(0, 0, 0, 0.1);
@@ -43,14 +58,7 @@ padding: 15px;
   }
   
   .inputBox {
-    /* width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(250, 244, 244, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-    gap: 40px; */
+
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -67,15 +75,6 @@ padding: 15px;
   }
   
   .assignButton {
-    /* width: 100%;
-    padding: 10px;
-    background: #5EB5AE ;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease; */
     width: 100%;
     padding: 14px;
     background: #5EB5AE;

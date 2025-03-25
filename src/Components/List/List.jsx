@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./list.module.css";
-import { FaEdit, FaTrash ,FaEllipsisH} from "react-icons/fa"; // Removed FaEye
+import { FaEdit, FaTrash, FaEllipsisH } from "react-icons/fa";
 
+// Default data included in the List component
 const defaultData = {
   student: [
     { id: 1, name: "Alice Johnson", image: "https://via.placeholder.com/70", college: "Harvard University" },
@@ -17,36 +18,40 @@ const defaultData = {
   ],
 };
 
-const List = ({ data = defaultData.student, type = "student" }) => {
+const List = ({ type = 'student', data }) => {
+  // Use provided data or fallback to default data based on type
+  const listData = data || defaultData[type];
+
   return (
     <div className={styles.listContainer}>
-      {data.length === 0 ? (
+      {listData.length === 0 ? (
         <p className={styles.noData}>No data available</p>
       ) : (
-        data.map((item, index) => (
-          <div key={item.id || index} className={styles.card}>
+        listData.map((item) => (
+          <div key={item.id} className={styles.card}>
             {/* Profile Image */}
             <div className={styles.profileContainer}>
-              <img src={item.image || "https://via.placeholder.com/70"}  className={styles.profilePic} />
+              <img 
+                src={item.image || "https://via.placeholder.com/70"} 
+                alt={item.name} 
+                className={styles.profilePic} 
+              />
             </div>
 
             {/* Details & Icons */}
             <div className={styles.detailsContainer}>
               {/* Name & Info */}
               <div className={styles.details}>
-                <h3 className={styles.name}>{item.name || "Unknown"}</h3>
+                <h3 className={styles.name}>{item.name}</h3>
                 <p className={styles.info}>
                   {type === "student" && (item.college || "No College Info")}
                   {type === "college" && (item.location || "No Location Info")}
-                  {type === "mentor" && (item.email || "No Email Info")}<br/>
-               
+                  {type === "mentor" && (item.email || "No Email Info")}
                 </p>
               </div>
 
               {/* Action Icons */}
               <div className={styles.icons}>
-                {/* Replaced FaEye with text */}
-                
                 <FaEdit className={styles.icon} title="Edit" />
                 <FaTrash className={styles.icon} title="Delete" />
                 <FaEllipsisH className={styles.icon} title="View More" />

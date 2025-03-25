@@ -28,6 +28,15 @@
   .statCard:hover {
     transform: translateY(-5px);
   }
+  .contentWrapper {
+    display: flex;
+    justify-content: flex-start; /* Align content to the left */
+    width: 100%;
+  }
+  
+  .listContainer {
+    width: 50%; /* Set List to 50% width */
+  }
   
   .icon {
     font-size: 40px;
