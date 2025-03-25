@@ -5,6 +5,9 @@ import MentorDashboard from "../Pages/MentorDashboard";
 import StudentDashboard from "../Pages/StudentDashboard";
 import CollegeDashboard from "../Pages/CollegeDashboard";
 import AssignForm from "../Components/AssignForm/AssignForm";
+import CollegeLeaderboard from "../pages/Leaderboard/CollegeLeaderboard"
+import StudentLeaderboard from "../pages/Leaderboard/StudentLeaderboard"
+import ProjectLeaderboard from "../pages/Leaderboard/ProjectLeaderboard"
 
 const DashboardRoutes = () => {
   return (
@@ -25,6 +28,9 @@ const DashboardRoutes = () => {
 
         {/* College Routes */}
         <Route path="/college" element={<CollegeDashboard />} />
+        <Route path="/colleges" element={<CollegeLeaderboard />} />
+        <Route path="/projects" element={<ProjectLeaderboard />} /> 
+        <Route path="/students" element={<StudentLeaderboard />} />
       </Routes>
     </DashboardLayout>
   );

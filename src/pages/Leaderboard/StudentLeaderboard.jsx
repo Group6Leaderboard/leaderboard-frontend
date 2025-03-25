@@ -22,7 +22,7 @@ const StudentLeaderboard = () => {
       <h1 className={styles.title}>Student Leaderboard</h1>
 
       
-      <div className={styles.stats}>
+      {/* <div className={styles.stats}>
         <div className={styles.card}>
           <p>Total Number Of Students</p>
           <h2>346+</h2>
@@ -36,7 +36,7 @@ const StudentLeaderboard = () => {
           <p>Total Number Of Colleges </p>
           <h2>100+</h2>
         </div>
-      </div>
+      </div> */}
 
      
       <h2 className={styles.sectionTitle}>Current Leaders</h2>

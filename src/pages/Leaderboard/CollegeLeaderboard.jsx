@@ -42,18 +42,7 @@ const StudentLeaderboard = () => {
         ))}
       </div>
 
-     
-      <div className={styles.filters}>
-        {["Week", "Month", "Today"].map((filter) => (
-          <button
-            key={filter}
-            className={selectedFilter === filter ? styles.activeFilter : ""}
-            onClick={() => setSelectedFilter(filter)}
-          >
-            {filter}
-          </button>
-        ))}
-      </div>
+
 
      
       <h2 className={styles.sectionTitle}>Global Ranking</h2>

@@ -23,23 +23,6 @@ const StudentLeaderboard = () => {
      
       <h1 className={styles.title}>Project Leaderboard</h1>
 
-     
-      <div className={styles.stats}>
-              <div className={styles.card}>
-                <p>Total Number Of Students</p>
-                <h2>346+</h2>
-                <span>Only the first three positions will be awarded prizes</span>
-              </div>
-              <div className={styles.card}>
-                <p>Total Number Of Projects</p>
-                <h2>732+</h2>
-              </div>
-              <div className={`${styles.card} ${styles.highlighted}`}>
-                <p>Total Number Of Colleges </p>
-                <h2>100+</h2>
-              </div>
-            </div>
-
     
       <h2 className={styles.sectionTitle}>Current Leaders</h2>
       <div className={styles.leaders}>
@@ -58,29 +41,6 @@ const StudentLeaderboard = () => {
           </div>
         ))}
       </div>
-
-      
-      <div className={styles.filters}>
-        {["Week", "Month", "Today"].map((filter) => (
-          <button
-            key={filter}
-            className={selectedFilter === filter ? styles.activeFilter : ""}
-            onClick={() => setSelectedFilter(filter)}
-          >
-            {filter}
-          </button>
-        ))}
-      </div>
-       {/* Search Bar */}
-       <div className={styles.searchContainer}>
-          <FaSearch className={styles.searchIcon} />
-          <input
-            type="text"
-            placeholder="Search Project..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
 
      
       <h2 className={styles.sectionTitle}>Global Ranking</h2>
