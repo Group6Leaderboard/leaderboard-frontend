@@ -26,27 +26,35 @@ const AssignForm = ({ role }) => {
       <div className={styles.formContainer}>
         <h2>{role === "admin" ? "Assign Project" : "Assign Task"}</h2>
 
-        <label>Name</label>
-        <input type="text" className={styles.inputBox} />
+        <div className={styles.formGroup}>
+          <label>Name</label>
+          <input type="text" className={styles.inputBox} />
+        </div>
 
-        <label>Description</label>
-        <input type="text" className={styles.inputBox} />
+        <div className={styles.formGroup}>
+          <label>Description</label>
+          <textarea className={styles.inputBox} rows="3"></textarea>
+        </div>
 
         {role === "admin" ? (
           <>
-            <label>College</label>
-            <select className={styles.inputBox}>
-              <option></option>
-            </select>
+            <div className={styles.formGroup}>
+              <label>College</label>
+              <select className={styles.inputBox}>
+                <option>Select College</option>
+              </select>
+            </div>
 
-            <label>Members</label>
-            <input type="text" className={styles.inputBox} />
+            <div className={styles.formGroup}>
+              <label>Members</label>
+              <input type="text" className={styles.inputBox} />
+            </div>
           </>
         ) : (
-          <>
+          <div className={styles.formGroup}>
             <label>Last Date</label>
             <input type="date" className={styles.inputBox} />
-          </>
+          </div>
         )}
 
         <button className={styles.assignButton}>
