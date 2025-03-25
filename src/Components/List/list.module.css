@@ -1,0 +1,97 @@
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    padding: 20px;
+  }
+  
+  .card {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    box-shadow: 0px 4px 15px #5EB5AE;}
+  
+  .profileContainer {
+    display: flex;
+    align-items: center;  /* Centers the profile image */
+    justify-content: center;
+    margin-right: 15px;
+  }
+  
+  .profilePic {
+    width: 80px;  /* Ensure width and height are the same */
+    height: 80px;
+    border-radius: 50%; /* Makes it a perfect circle */
+    object-fit: cover;  /* Ensures image fills the circle without distortion */
+    margin-right: 15px;
+    border: 2px solid #ddd; /* Optional border for aesthetics */
+    flex-shrink: 0;
+    margin-top: 15px;
+   
+  }
+  
+  .detailsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .details {
+    flex-grow: 1;
+  }
+  
+  .name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .info {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  .icons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .viewMore {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .viewMore:hover {
+    color: #5EB5AE;
+  }
+  
+  .icon {
+    cursor: pointer;
+    font-size: 18px;
+    color: #000000;
+    transition: 0.2s;
+  }
+  
+  .icon:hover {
+    color: #5EB5AE;
+  }
+  
+  .noData {
+    text-align: center;
+    font-size: 16px;
+    color: gray;
+  }
+  
