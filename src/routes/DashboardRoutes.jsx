@@ -8,7 +8,8 @@ import AssignForm from "../Components/AssignForm/AssignForm";
 import CollegeLeaderboard from "../pages/Leaderboard/CollegeLeaderboard"
 import StudentLeaderboard from "../pages/Leaderboard/StudentLeaderboard"
 import ProjectLeaderboard from "../pages/Leaderboard/ProjectLeaderboard"
-
+import MentorProject from "../Components/MentorProject/MentorProject";
+import SubmittedTask from "../Components/MentorProject/SubmittedTask";
 const DashboardRoutes = () => {
   return (
     <DashboardLayout>
@@ -22,6 +23,8 @@ const DashboardRoutes = () => {
         {/* Mentor Routes */}
         <Route path="/mentor" element={<MentorDashboard />} />
         <Route path="/mentor/assign-task" element={<AssignForm role="mentor" />} />
+        <Route path="/mentor/projects" element={<MentorProject role="mentor" />} />
+        <Route path="/mentor/submitted-tasks" element={<SubmittedTask />} />
 
         {/* Student Routes */}
         <Route path="/student" element={<StudentDashboard />} />
