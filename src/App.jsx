@@ -12,9 +12,8 @@ import ProjectLeaderboard from "./pages/Leaderboard/ProjectLeaderboard";
 import StudentLeaderboard from "./pages/Leaderboard/StudentLeaderboard";
 
 const App = () => {
-  const location = useLocation(); // Get the current route
+  const location = useLocation(); 
 
-  // Routes where the sidebar should not be visible
   const hideSidebarRoutes = ["/login", "/students", "/colleges", "/projects"];
 
   return (
