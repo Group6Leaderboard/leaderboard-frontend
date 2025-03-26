@@ -1,3 +1,4 @@
+
 .container {
   width: 90%;
   max-width: 1200px; /* Prevents extra-wide layout */
@@ -236,6 +237,7 @@ label {
   background: #02414B;
 }
 .modal {
+  width: 30%;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -247,6 +249,9 @@ label {
 }
 
 .modalContent {
+  width: 90%; /* Increase width to make it more prominent */
+  max-width: 500px; /* Prevent it from becoming too wide */
+  margin: 0 auto; /* Center it within the modal */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -269,4 +274,33 @@ label {
 .modal li:hover {
   background: #f0f0f0;
 }
+@media (max-width: 768px) {
+  .assign-form {
+    max-width: 90%;
+    padding: 15px;
+  }
 
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .modal-content {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .member-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .member {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+}

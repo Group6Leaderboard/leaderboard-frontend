@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaUsers, FaProjectDiagram, FaTasks, FaChevronRight } from "react-icons/fa";
+import { FaUsers, FaProjectDiagram, FaTasks, FaChevronRight, FaBars, FaTimes } from "react-icons/fa";
 import { MdDashboard, MdAssignmentAdd, MdLeaderboard } from "react-icons/md";
 import { PiStudentFill } from "react-icons/pi";
 import { GoProjectRoadmap } from "react-icons/go";
@@ -10,11 +10,9 @@ import logo from "../../assets/inspiro-logo.png";
 
 const Sidebar = () => {
   const location = useLocation();
-  const [openIndex, setOpenIndex] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleDropdown = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const toggleSidebar = () => setIsOpen(!isOpen);
 
   const sidebarItems = [
     { role: "/admin", items: [
@@ -46,30 +44,38 @@ const Sidebar = () => {
   const currentRole = sidebarItems.find((role) => location.pathname.startsWith(role.role));
 
   return (
-    <div className={`d-flex flex-column vh-100 p-3 ${styles.sidebar}`}>
-      <div className="text-center mb-3">
-        <img src={logo} alt="Logo" className={styles.logo} />
-      </div>
+    <>
+      {/* Hamburger Button (Hidden on Large Screens) */}
+      <button className={styles.hamburger} onClick={toggleSidebar}>
+        {isOpen ? <FaTimes /> : <FaBars />}
+      </button>
 
-      <ul className="nav flex-column">
-        {currentRole?.items.map((item, index) => (
-          <li key={index} className="nav-item">
-            <Link
-              to={item.path}
-              className={`nav-link d-flex align-items-center justify-content-between ${styles.navLink} ${
-                location.pathname === item.path ? styles.active : ""
-              }`}
-              onClick={() => toggleDropdown(index)}
-            >
-              <div className="d-flex align-items-center">
-                {item.icon} <span className="ms-2">{item.name}</span>
-              </div>
-              {location.pathname === item.path && <FaChevronRight className={styles.arrowIcon} />}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+      {/* Sidebar */}
+      <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+        <div className="text-center mb-3">
+          <img src={logo} alt="Logo" className={styles.logo} />
+        </div>
+
+        <ul className="nav flex-column">
+          {currentRole?.items.map((item, index) => (
+            <li key={index} className="nav-item">
+              <Link
+                to={item.path}
+                className={`nav-link d-flex align-items-center justify-content-between ${styles.navLink} ${
+                  location.pathname === item.path ? styles.active : ""
+                }`}
+                onClick={() => setIsOpen(false)} // Close sidebar on click
+              >
+                <div className="d-flex align-items-center">
+                  {item.icon} <span className="ms-2">{item.name}</span>
+                </div>
+                {location.pathname === item.path && <FaChevronRight className={styles.arrowIcon} />}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 

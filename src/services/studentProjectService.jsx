@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080/api/student-projects"; 
 
-export const assignProjectToStudent = async (studentId, projectId) => {
+export const assignProject = async (studentId, projectId) => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.post(

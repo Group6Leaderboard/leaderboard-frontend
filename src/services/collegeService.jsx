@@ -18,7 +18,6 @@ export const getCollegeById = async (id) => {
   }
 };
 
-// Update College by ID
 export const updateCollege = async (id, collegeData) => {
   try {
     const token = localStorage.getItem("token");
@@ -34,7 +33,6 @@ export const updateCollege = async (id, collegeData) => {
   }
 };
 
-// Delete College by ID
 export const deleteCollege = async (id) => {
   try {
     const token = localStorage.getItem("token");
