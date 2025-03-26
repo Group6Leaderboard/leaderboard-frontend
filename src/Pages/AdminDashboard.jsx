@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { getUsers } from "../services/userService";
+import { FaPlus } from "react-icons/fa"; 
 import styles from "./adminDashboard.module.css";
 import List from "../Components/List/List";
+import AddUser from "../Components/AddUser/AddUser";
 
 const AdminDashboard = () => {
-  const location = useLocation();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showAddUser, setShowAddUser] = useState(false);
+  const [userType, setUserType] = useState("");
 
-  let type = "";
-  if (location.pathname === "/admin/students") type = "student";
-  if (location.pathname === "/admin/colleges") type = "college";
-  if (location.pathname === "/admin/mentors") type = "mentor";
+  // Determine user type based on the URL path
+  const type = window.location.pathname.includes("students")
+    ? "student"
+    : window.location.pathname.includes("colleges")
+    ? "college"
+    : window.location.pathname.includes("mentors")
+    ? "mentor"
+    : "";
 
   useEffect(() => {
     if (!type) return;
@@ -36,9 +42,32 @@ const AdminDashboard = () => {
     fetchUsers();
   }, [type]);
 
+  // Toggle AddUser card visibility
+  const handleToggleAddUser = () => {
+    setShowAddUser(!showAddUser);
+    setUserType(type);
+  };
+
   return (
     <div className={styles.dashboardContainer}>
-      <h2 className={styles.title}>Welcome to Admin Dashboard</h2>
+      <div className={styles.header}>
+        <h2 className={styles.title}>Welcome to Admin Dashboard</h2>
+        {type && (
+          <button className={styles.addButton} onClick={handleToggleAddUser}>
+            <FaPlus className={styles.plusIcon} /> Add New {type.charAt(0).toUpperCase() + type.slice(1)}
+          </button>
+        )}
+      </div>
+
+      {/* Show AddUser card when button is clicked */}
+      {showAddUser && (
+        <div className={styles.overlay}>
+          <div className={styles.addUserCard}>
+            <AddUser type={userType} onClose={handleToggleAddUser} />
+          </div>
+        </div>
+      )}
+
       <div className={styles.contentWrapper}>
         {loading ? (
           <p className={styles.loading}>Loading...</p>
