@@ -15,7 +15,6 @@ import StudentLeaderboard from "../pages/Leaderboard/StudentLeaderboard";
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Authentication Route */}
       <Route path="/login" element={<LoginPage />} />
 
       {/* Dashboard Routes */}
