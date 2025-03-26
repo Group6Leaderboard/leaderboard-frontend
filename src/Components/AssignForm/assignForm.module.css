@@ -1,98 +1,306 @@
 
-
 .container {
-    width: 100%;
-    /* max-width: 100vw; */
-    margin: auto;
-  }
+  width: 90%;
+  max-width: 1200px; /* Prevents extra-wide layout */
+  margin: auto;
+  padding: 20px;
+}
 
-  .statsContainer {
-    display: flex;
-    justify-content: center; /* Centers the cards */
-    align-items: center; /* Aligns text vertically */
-    flex-wrap: wrap; /* Ensures responsiveness */
-    margin-bottom: 15px;
-    gap: 40px;
-    padding: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  .statsCardTitle {
-    margin-bottom: 55px; /* Reduce gap */
-    font-size: 16px; /* Adjust title size */
-    font-weight: 500;
-    color: #555; /* Slightly dim to create contrast */
-  }
-  
-  .statsCardValue {
-    font-size: 22px; /* Make the value stand out */
-    font-weight: bold;
-    color: #333;
-  }
+.statsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  gap: 40px;
+  padding: 20px;
+  padding-bottom: 40px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.statsCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 180px; /* Uniform size */
+  min-height: 120px; 
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 15px;
+  box-sizing: border-box; /* This ensures padding is included in width/height */
+}
+
+.inputBox {
+  width: 100%;
+  padding: 2px; /* Reduced padding for smaller height */
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0px 2px 4px rgba(250, 244, 244, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+textarea.inputBox {
+  height: 80px; /* Keeps description box almost the same */
+  resize: vertical; /* Allows user to expand if needed */
+}
+
+.inputBox:focus {
+  outline: none;
+  box-shadow: 0px 2px 8px #5EB5AE;
+}
+
+
+
+.selectWrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.selectWrapper::after {
+  content: '▼';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 3;
+  color: #666;
+}
+.selectBox[size="4"] {
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 150px; 
+  overflow-y: auto;  
+}
+
+
+.selectBox {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  appearance: none; 
+}
+
+.selectBox:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.selectBox option {
+  background: white;
+  padding: 8px;
+}
+
+.selectBox {
+  max-height: 150px; 
+  overflow-y: auto; 
+}
+
+.optionItem {
+  padding: 10px;
+}
+
+.selectBox::scrollbar {
+  width: 8px;
+}
+
+.selectBox::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.selectBox::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.selectBox::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 
 .formContainer {
-    max-width: 4000px;  
-    margin: auto;
-    padding-left: 30px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0px  4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
+  max-width: 100%; /* Prevents overflow */
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.memberContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.memberInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inputBox {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.addButton, .removeButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.addButton {
+  background-color: #ffffff; /* Green for add */
+}
+
+.removeButton {
+  background-color: #ffffff; /* Red for remove */
+}
+
+.addButton:hover {
+  background-color: #d6d6d6;
+}
+
+.removeButton:hover {
+  background-color: #eea2aa;
+}
+
+
+label {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+
+
+.assignButton {
+  width: 100%;
+  padding: 12px;
+  background: #5EB5AE;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-weight: bold;
+}
+
+.assignButton:hover {
+  background: #02414B;
+}
+.modal {
+  width: 30%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.modalContent {
+  width: 90%; /* Increase width to make it more prominent */
+  max-width: 500px; /* Prevent it from becoming too wide */
+  margin: 0 auto; /* Center it within the modal */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+}
+
+.modal ul {
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.modal li {
+  padding: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.modal li:hover {
+  background: #f0f0f0;
+}
+@media (max-width: 768px) {
+  .assign-form {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .modal-content {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .member-list {
     flex-direction: column;
-    gap: 10px;
-  
-    
+    align-items: center;
   }
-  
-  h2 {
-    text-align: center;
-    /* margin-bottom: 25px; */
-    font-size: 24px;
-    margin-bottom: 30px;
-  }
-  
-  label {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 5px;
-   
-  }
-  
-  .inputBox {
 
+  .member {
     width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-shadow: 0px 2px 4px rgba(250, 244, 244, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-  }
-  
-  .inputBox:focus {
-    outline: none;
-    box-shadow: 0px 2px 8px #5EB5AE ; /* Yellow glow on focus */
-  }
-  
-  .assignButton {
-    width: 100%;
-    padding: 14px;
-    background: #5EB5AE;
-    color: white;
-    font-size: 18px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    font-weight: bold;
-  }
-  
-  .assignButton:hover {
-    background: #02414B ;
+    justify-content: space-between;
   }
 
-
-  
-
-   
-    
+  .modal-content {
+    width: 95%;
+  }
+}

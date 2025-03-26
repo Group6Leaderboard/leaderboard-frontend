@@ -78,7 +78,7 @@ const Navbar = ({ userType, userData }) => {
       </div>
 
       <div className={styles.mobileTopBar}>
-      <div 
+      {/* <div 
           className={styles.mobileSearchIcon} 
           onClick={() => setShowMobileSearch(!showMobileSearch)}
         >
@@ -88,7 +88,7 @@ const Navbar = ({ userType, userData }) => {
           <div className={styles.mobileSearchBar} ref={searchInputRef}>
             <input type="text" placeholder="Search..." className={styles.mobileSearchInput} autoFocus />
           </div>
-        )}
+        )} */}
         <div className={styles.mobileUserInfo}>
           <FaUserCircle className={styles.mobileProfileIcon} />
           <span className={styles.mobileUsername}>John Doe</span>

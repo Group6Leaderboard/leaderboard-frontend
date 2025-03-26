@@ -11,6 +11,7 @@ const App = () => {
   return (
    
       <Routes>
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/*" element={<DashboardRoutes />} />
       {/* <Route path="/" element={<StudentDash />} /> */}
        {/* <Route path="/" element={<LeaderBoardCard title="Student Leaderboard" type="project" />} />  */}

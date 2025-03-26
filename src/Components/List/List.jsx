@@ -1,59 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./list.module.css";
 import { FaEdit, FaTrash, FaEllipsisH } from "react-icons/fa";
+import { getCollegeById, deleteCollege } from "../../services/collegeService";
+import { deleteUser } from "../../services/userService";
 
-// Default data included in the List component
-const defaultData = {
-  student: [
-    { id: 1, name: "student 1", image: "https://via.placeholder.com/70", college: "Harvard University" },
-    { id: 2, name: "student 2 ", image: "https://via.placeholder.com/70", college: "MIT" },
-  ],
-  college: [
-    { id: 1, name: "college 1", image: "https://via.placeholder.com/70", location: "California, USA" },
-    { id: 2, name: "college 2", image: "https://via.placeholder.com/70", location: "Oxford, UK" },
-  ],
-  mentor: [
-    { id: 1, name: "mentor 1", image: "https://via.placeholder.com/70", email: "emily.carter@edu.com" },
-    { id: 2, name: "mentor 2", image: "https://via.placeholder.com/70", email: "mark.wilson@edu.com" },
-  ],
-};
 
-const List = ({ type = 'student', data }) => {
-  // Use provided data or fallback to default data based on type
-  const listData = data || defaultData[type];
+const List = ({ type = "student", data = [], onDeleteSuccess }) => {
+  const [collegeNames, setCollegeNames] = useState({});
+
+  useEffect(() => {
+    if (type === "student") {
+      const fetchCollegeNames = async () => {
+        const newCollegeNames = {};
+        for (const student of data) {
+          if (student.collegeId && !collegeNames[student.collegeId]) {
+            try {
+              const response = await getCollegeById(student.collegeId);
+              newCollegeNames[student.collegeId] = response.name || "Unknown College";
+            } catch (error) {
+              newCollegeNames[student.collegeId] = "Error Fetching College";
+            }
+          }
+        }
+        setCollegeNames((prev) => ({ ...prev, ...newCollegeNames }));
+      };
+      fetchCollegeNames();
+    }
+  }, [data, type]);
+
+  const handleDelete = async (type, userId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+    if (!confirmDelete) return;
+
+    try {
+      if (type === "college") {
+        await deleteCo(userId); 
+        alert("User deleted successfully!");
+
+      } else {
+        await deleteUser(userId); 
+        alert("User deleted successfully!");
+
+      }
+    } catch (error) {
+      alert("Failed to delete user. Please try again.");
+      console.error("Error deleting user:", error);
+    }
+  };
 
   return (
     <div className={styles.listContainer}>
-      {listData.length === 0 ? (
+      {data.length === 0 ? (
         <p className={styles.noData}>No data available</p>
       ) : (
-        listData.map((item) => (
+        data.map((item) => (
           <div key={item.id} className={styles.card}>
-            {/* Profile Image */}
             <div className={styles.profileContainer}>
-              <img 
-                src={item.image || "https://via.placeholder.com/70"} 
-                alt={item.name} 
-                className={styles.profilePic} 
+              <img
+                src={item.image || "https://via.placeholder.com/70"}
+                alt={item.name}
+                className={styles.profilePic}
               />
             </div>
 
-            {/* Details & Icons */}
             <div className={styles.detailsContainer}>
-              {/* Name & Info */}
               <div className={styles.details}>
                 <h3 className={styles.name}>{item.name}</h3>
                 <p className={styles.info}>
-                  {type === "student" && (item.college || "No College Info")}
+                  {type === "student" && (collegeNames[item.collegeId] || "Fetching...")}
                   {type === "college" && (item.location || "No Location Info")}
                   {type === "mentor" && (item.email || "No Email Info")}
                 </p>
               </div>
 
-              {/* Action Icons */}
               <div className={styles.icons}>
                 <FaEdit className={styles.icon} title="Edit" />
-                <FaTrash className={styles.icon} title="Delete" />
+                <FaTrash className={styles.icon} title="Delete" onClick={() => handleDelete(type, item.id)} />
                 <FaEllipsisH className={styles.icon} title="View More" />
               </div>
             </div>
