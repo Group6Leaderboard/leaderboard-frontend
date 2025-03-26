@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "./Login.module.css"; 
 import bgImage from "../../assets/logog.webp";
+import {login} from "../../services/authService";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,28 +15,21 @@ const Login = () => {
     e.preventDefault();
     setError(""); 
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/auth/login",
-        { email, password },
-        { 
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+    try {    const data = await login(email, password);
 
-      if (response.data.message === "Success") {
-        const { token, role } = response.data.response; 
+
+      if (data.message === "Success") {
+        const { token, role } = data.response; 
         
         localStorage.setItem("token", token);
-        localStorage.setItem("role", role);
+        // localStorage.setItem("role", role);
 
-        // Redirect user based on role
         if (role === "ADMIN") {
-          navigate("/admin/dashboard");
+          navigate("/admin");
         } else if (role === "MENTOR") {
-          navigate("/mentor/dashboard");
+          navigate("/mentor");
         } else if (role === "STUDENT") {
-          navigate("/student/dashboard");
+          navigate("/student");
         } else {
           navigate("/"); // Default route if role is unknown
         }
@@ -45,7 +39,6 @@ const Login = () => {
     } catch (err) {
       console.error("Login error:", err);
 
-      // Handle invalid credentials
       if (err.response && err.response.status === 404) {
         setError("Invalid credentials. Please try again.");
       } else {
