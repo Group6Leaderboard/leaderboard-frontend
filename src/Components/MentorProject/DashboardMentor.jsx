@@ -1,6 +1,6 @@
 import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
-import "./DashboardMentor.css";
+import "./dashboardMentor.module.css";
 
 const DashboardMentor = () => {
   // Sample Data

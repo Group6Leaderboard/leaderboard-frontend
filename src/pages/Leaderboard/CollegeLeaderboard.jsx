@@ -1,8 +1,7 @@
 import { useState } from "react";
-import styles from "./Leaderboard.module.css";
+import styles from "./leaderboard.module.css";
 
 const StudentLeaderboard = () => {
-  const [selectedFilter, setSelectedFilter] = useState("Today");
 
   const leaders = [
     { name: "ST Thomas", points: "98", wins: 43, tasks: 167, achievements: 476, image: "https://via.placeholder.com/50" },

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import styles from "./Login.module.css"; 
+import styles from "./login.module.css"; 
 import bgImage from "../../assets/logog.webp";
 import {login} from "../../services/authService";
 

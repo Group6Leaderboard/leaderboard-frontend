@@ -1,10 +1,8 @@
 import { useState } from "react";
-import styles from "./Leaderboard.module.css";
+import styles from "./leaderboard.module.css";
 import { FaSearch } from "react-icons/fa";
 
 const StudentLeaderboard = () => {
-  const [selectedFilter, setSelectedFilter] = useState("Today");
-  const [searchQuery, setSearchQuery] = useState("");
 
   const leaders = [
     { name: "Project 1", points: "98", wins: 43, tasks: 167, achievements: 476, image: "https://via.placeholder.com/50" },

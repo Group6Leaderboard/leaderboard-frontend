@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./MentorProject.css";
+import "./mentorProject.module.css";
 
 const projects = [
   { id: 1, title: "AI Chatbot", college: "XYZ University", participants: [{ name: "John Doe" }, { name: "Alice Smith" }] },

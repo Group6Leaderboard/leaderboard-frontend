@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./SubmittedTask.css";
+import styles from "./submittedTask.module.css";
+
 
 const submissions = [
   {
@@ -10,8 +11,8 @@ const submissions = [
     assignedDate: "2024-02-15",
     submittedDate: "2024-03-01",
     document: "chatbot_report.pdf",
-    score: 85,
-    status: "Approved",
+    score: 0,
+    status: "Not Submitted",
   },
   {
     id: 2,
@@ -20,7 +21,7 @@ const submissions = [
     submittedDate: "2024-03-05",
     document: "ecommerce_doc.pdf",
     score: 90,
-    status: "Pending",
+    status: "To Be Reviewed",
   },
   {
     id: 3,
@@ -29,7 +30,7 @@ const submissions = [
     submittedDate: "2024-03-08",
     document: "attendance_system.pdf",
     score: 78,
-    status: "Rejected",
+    status: "Completed",
   },
 ];
 
@@ -37,12 +38,10 @@ const SubmittedTask = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="container submitted-task">
-      <h2 className="my-4 text-center">Submitted Tasks</h2>
-      <button className="btn back-btn mb-3" onClick={() => navigate("/mentor/projects")}>
-        Back to Projects
-      </button>
-      <table className="table table-striped table-bordered">
+<div className={`container ${styles["submitted-task"]}`}>
+
+      <h2 className="my-4 text-center"> Tasks</h2>
+      <table className="table table-bordered">
         <thead className="thead-dark">
           <tr>
             <th>Project Name</th>

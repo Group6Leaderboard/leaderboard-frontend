@@ -10,11 +10,7 @@ import logo from "../../assets/inspiro-logo.png";
 
 const Sidebar = () => {
   const location = useLocation();
-  const [openIndex, setOpenIndex] = useState(null);
-
-  const toggleDropdown = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const sidebarItems = [
     { role: "/admin", items: [
@@ -45,6 +41,10 @@ const Sidebar = () => {
 
   const currentRole = sidebarItems.find((role) => location.pathname.startsWith(role.role));
 
+  const handleClick = (index) => {
+    setSelectedIndex(index);
+  };
+
   return (
     <div className={`d-flex flex-column vh-100 p-3 ${styles.sidebar}`}>
       <div className="text-center mb-3">
@@ -53,17 +53,13 @@ const Sidebar = () => {
 
       <ul className="nav flex-column">
         {currentRole?.items.map((item, index) => (
-          <li key={index} className="nav-item">
-            <Link
-              to={item.path}
-              className={`nav-link d-flex align-items-center justify-content-between ${styles.navLink} ${
-                location.pathname === item.path ? styles.active : ""
-              }`}
-              onClick={() => toggleDropdown(index)}
-            >
-              <div className="d-flex align-items-center">
-                {item.icon} <span className="ms-2">{item.name}</span>
+          <li key={index} className={`nav-item ${selectedIndex === index ? styles.selected : ""}`} onClick={() => handleClick(index)}>
+            <Link to={item.path} className={`nav-link d-flex align-items-center ${styles.navLink} ${location.pathname === item.path ? styles.active : ""}`}>
+              <div className={`d-flex align-items-center ${styles.iconWrapper}`}>
+                {item.icon}
+                {selectedIndex === index && <span className={styles.jumpEffect}></span>}
               </div>
+              <span className={styles.linkText}>{item.name}</span>
               {location.pathname === item.path && <FaChevronRight className={styles.arrowIcon} />}
             </Link>
           </li>

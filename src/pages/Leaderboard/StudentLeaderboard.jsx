@@ -1,19 +1,18 @@
 import { useState } from "react";
-import styles from "./Leaderboard.module.css";
+import styles from "./leaderboard.module.css";
 
 const StudentLeaderboard = () => {
-  const [selectedFilter, setSelectedFilter] = useState("Today");
 
   const leaders = [
-    { name: "Theresa Webb", points: "98", wins: 43, tasks: 167, achievements: 476, image: "https://via.placeholder.com/50" },
-    { name: "Floyd Miles", points: "96", wins: 37, tasks: 132, achievements: 482, image: "https://via.placeholder.com/50" },
-    { name: "Jacob Jones", points: "92", wins: 32, tasks: 68, achievements: 268, image: "https://via.placeholder.com/50" },
+    { name: "Varun K", points: "98", wins: 43, tasks: 167, achievements: 476, image: "https://via.placeholder.com/50" },
+    { name: "Aparna KP", points: "96", wins: 37, tasks: 132, achievements: 482, image: "https://via.placeholder.com/50" },
+    { name: "Jacob M", points: "92", wins: 32, tasks: 68, achievements: 268, image: "https://via.placeholder.com/50" },
   ];
 
   const ranking = [
-    { rank: 1, name: "Theresa Webb", id: "1591245", proj: 236,  college: "ST Thomas", points: "98" },
-    { rank: 2, name: "Floyd Miles", id: "1391245", proj: 167,  college: "Rajadhani", points: "96" },
-    { rank: 3, name: "Jacob Jones", id: "1892245", proj: 146, college: "Christ", points: "92" },
+    { rank: 1, name: "Varun K", id: "1591245", proj: 236,  college: "ST Thomas", points: "98" },
+    { rank: 2, name: "Aparna KP", id: "1391245", proj: 167,  college: "Rajadhani", points: "96" },
+    { rank: 3, name: "Jacob M", id: "1892245", proj: 146, college: "Christ", points: "92" },
   ];
 
   return (
@@ -56,20 +55,6 @@ const StudentLeaderboard = () => {
           </div>
         ))}
       </div>
-
-     
-      <div className={styles.filters}>
-        {["Week", "Month", "Today"].map((filter) => (
-          <button
-            key={filter}
-            className={selectedFilter === filter ? styles.activeFilter : ""}
-            onClick={() => setSelectedFilter(filter)}
-          >
-            {filter}
-          </button>
-        ))}
-      </div>
-
      
       <h2 className={styles.sectionTitle}>Global Ranking</h2>
       <div className={styles.tableContainer}>

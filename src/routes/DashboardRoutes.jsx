@@ -25,6 +25,7 @@ const DashboardRoutes = () => {
         <Route path="/mentor/assign-task" element={<AssignForm role="mentor" />} />
         <Route path="/mentor/projects" element={<MentorProject role="mentor" />} />
         <Route path="/mentor/submitted-tasks" element={<SubmittedTask />} />
+        <Route path="/mentor/task" element={<SubmittedTask />} />
 
         {/* Student Routes */}
         <Route path="/student" element={<StudentDashboard />} />

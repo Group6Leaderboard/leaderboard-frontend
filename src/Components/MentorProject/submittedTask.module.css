@@ -1,0 +1,47 @@
+/* Table Styles */
+.submitted-task {
+    padding: 20px;
+}
+
+.table {
+    width: 100%;
+    /* background-color: #fff; */
+    border-radius: 10px;
+    /* overflow: visible; */
+    border-collapse: collapse; /* Ensures proper row spacing */
+}
+
+/* Header Row */
+.thead-dark th {
+    /* background-color: #ffffff !important; */
+    color: #793838;
+    text-align: center;
+}
+
+/* Cell Padding */
+td, th {
+    text-align: center;
+    padding: 12px;
+}
+
+/* Alternating Row Colors */
+.table tbody :global(tr:nth-child(odd)) {
+    background-color: #69b8a4 !important; /* First row - Same as heading text */
+    color: rgb(0, 0, 0) !important; /* Text color for odd rows */
+}
+
+.table tbody :global(tr:nth-child(even)) {
+    background-color: #ffffff !important; /* Second row - White */
+    color: black !important; /* Text color for even rows */
+}
+
+/* Links */
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
