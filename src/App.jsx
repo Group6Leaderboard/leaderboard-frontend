@@ -1,16 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./Login.jsx"; 
-import "./App.css";
+import React from "react";
+import {   Routes, Route } from "react-router-dom"; // Import useLocation here
+import DashboardRoutes from './routes/DashboardRoutes'
+import LoginPage from "./pages/LoginPage/LoginPage";
+const App = () => {
+  
 
-function App() {
   return (
-    <Router>
+   
       <Routes>
-        <Route path="/" element={<h1>Home Page</h1>} /> 
-        <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/*" element={<DashboardRoutes />} />
       </Routes>
-    </Router>
+   
   );
-}
+};
 
 export default App;
