@@ -5,16 +5,16 @@ import { FaEdit, FaTrash, FaEllipsisH } from "react-icons/fa";
 // Default data included in the List component
 const defaultData = {
   student: [
-    { id: 1, name: "Alice Johnson", image: "https://via.placeholder.com/70", college: "Harvard University" },
-    { id: 2, name: "Bob Brown", image: "https://via.placeholder.com/70", college: "MIT" },
+    { id: 1, name: "student 1", image: "https://via.placeholder.com/70", college: "Harvard University" },
+    { id: 2, name: "student 2 ", image: "https://via.placeholder.com/70", college: "MIT" },
   ],
   college: [
-    { id: 1, name: "Stanford University", image: "https://via.placeholder.com/70", location: "California, USA" },
-    { id: 2, name: "Oxford University", image: "https://via.placeholder.com/70", location: "Oxford, UK" },
+    { id: 1, name: "college 1", image: "https://via.placeholder.com/70", location: "California, USA" },
+    { id: 2, name: "college 2", image: "https://via.placeholder.com/70", location: "Oxford, UK" },
   ],
   mentor: [
-    { id: 1, name: "Dr. Emily Carter", image: "https://via.placeholder.com/70", email: "emily.carter@edu.com" },
-    { id: 2, name: "Professor Mark Wilson", image: "https://via.placeholder.com/70", email: "mark.wilson@edu.com" },
+    { id: 1, name: "mentor 1", image: "https://via.placeholder.com/70", email: "emily.carter@edu.com" },
+    { id: 2, name: "mentor 2", image: "https://via.placeholder.com/70", email: "mark.wilson@edu.com" },
   ],
 };
 

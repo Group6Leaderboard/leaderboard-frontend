@@ -2,7 +2,6 @@ import React from "react";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Navbar from "../../Components/Navbar/Navbar";
 import styles from "./dashboardLayout.module.css";
-
 const DashboardLayout = ({ children, role }) => {
   return (
     <div className={styles.dashboardContainer}>
@@ -18,5 +17,4 @@ const DashboardLayout = ({ children, role }) => {
     </div>
   );
 };
-
 export default DashboardLayout;
