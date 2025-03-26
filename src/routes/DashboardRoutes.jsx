@@ -24,6 +24,7 @@ const DashboardRoutes = () => {
 
         {/* Mentor Routes */}
         <Route path="/mentor" element={<MentorDashboard />} />
+        <Route path="/mentor/projects" element={<MentorDashboard />} />
         <Route path="/mentor/assign-task" element={<AssignForm role="mentor" />} />
         <Route path="/mentor/projects" element={<MentorProject role="mentor" />} />
         <Route path="/mentor/submitted-tasks" element={<SubmittedTask />} />
@@ -31,6 +32,7 @@ const DashboardRoutes = () => {
 
         {/* Student Routes */}
         <Route path="/student" element={<StudentDashboard />} />
+        <Route path="/student/projects" element={<StudentDashboard />} />
 
         {/* College Routes */}
         <Route path="/college" element={<CollegeDashboard />} />

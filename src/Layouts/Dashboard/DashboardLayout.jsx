@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import Navbar from "../../Components/Navbar/Navbar";
 import styles from "./dashboardLayout.module.css";
-
 const DashboardLayout = ({ children, role }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true); 
 
@@ -22,5 +21,4 @@ const DashboardLayout = ({ children, role }) => {
     </div>
   );
 };
-
 export default DashboardLayout;
