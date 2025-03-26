@@ -1,8 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/tasks"; // Base URL for Task API
+const API_URL = "http://localhost:8080/api/tasks"; 
 
-// Create a new task (Mentor only)
 export const createTask = async (taskPostDTO) => {
   try {
     const token = localStorage.getItem("token");
@@ -17,8 +16,21 @@ export const createTask = async (taskPostDTO) => {
     throw error.response ? error.response.data : { message: "Network Error" };
   }
 };
+export const getAllTasks = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(API_URL, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : { message: "Network Error" };
+  }
+};
 
-// Update a task (Mentor or Student)
 export const updateTask = async (id, { dueDate, score, file }) => {
   try {
     const token = localStorage.getItem("token");
@@ -41,7 +53,6 @@ export const updateTask = async (id, { dueDate, score, file }) => {
   }
 };
 
-// Get a task by ID
 export const getTaskById = async (id) => {
   try {
     const token = localStorage.getItem("token");

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./list.module.css";
 import { FaEdit, FaTrash, FaEllipsisH } from "react-icons/fa";
-import { getCollegeById } from "../../services/collegeService"; // Import service
+import { getCollegeById, deleteCollege } from "../../services/collegeService";
+import { deleteUser } from "../../services/userService";
 
-const List = ({ type = "student", data = [] }) => {
+
+const List = ({ type = "student", data = [], onDeleteSuccess }) => {
   const [collegeNames, setCollegeNames] = useState({});
 
   useEffect(() => {
@@ -25,6 +27,26 @@ const List = ({ type = "student", data = [] }) => {
       fetchCollegeNames();
     }
   }, [data, type]);
+
+  const handleDelete = async (type, userId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+    if (!confirmDelete) return;
+
+    try {
+      if (type === "college") {
+        await deleteCo(userId); 
+        alert("User deleted successfully!");
+
+      } else {
+        await deleteUser(userId); 
+        alert("User deleted successfully!");
+
+      }
+    } catch (error) {
+      alert("Failed to delete user. Please try again.");
+      console.error("Error deleting user:", error);
+    }
+  };
 
   return (
     <div className={styles.listContainer}>
@@ -53,7 +75,7 @@ const List = ({ type = "student", data = [] }) => {
 
               <div className={styles.icons}>
                 <FaEdit className={styles.icon} title="Edit" />
-                <FaTrash className={styles.icon} title="Delete" />
+                <FaTrash className={styles.icon} title="Delete" onClick={() => handleDelete(type, item.id)} />
                 <FaEllipsisH className={styles.icon} title="View More" />
               </div>
             </div>

@@ -2,9 +2,10 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080/auth"; // Base URL for authentication API
 
-// Signup
+
 export const signup = async (signupDto, token) => {
   try {
+    const token = localStorage.getItem("token");
     const response = await axios.post(
       `${API_URL}/signup`,
       signupDto,
@@ -21,7 +22,7 @@ export const signup = async (signupDto, token) => {
   }
 };
 
-// Login
+
 export const login = async (email, password) => {
   try {
     const response = await axios.post(
@@ -35,9 +36,10 @@ export const login = async (email, password) => {
   }
 };
 
-// Logout
+
 export const logout = async (token) => {
   try {
+    const token = localStorage.getItem("token");
     const response = await axios.post(
       `${API_URL}/logout`,
       {},

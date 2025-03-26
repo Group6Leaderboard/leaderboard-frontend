@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaUsers, FaProjectDiagram, FaTasks, FaChevronRight } from "react-icons/fa";
+import { FaUsers, FaProjectDiagram, FaTasks, FaChevronRight, FaBars, FaTimes } from "react-icons/fa";
 import { MdDashboard, MdAssignmentAdd, MdLeaderboard } from "react-icons/md";
 import { PiStudentFill } from "react-icons/pi";
 import { GoProjectRoadmap } from "react-icons/go";
@@ -46,10 +46,17 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`d-flex flex-column vh-100 p-3 ${styles.sidebar}`}>
-      <div className="text-center mb-3">
-        <img src={logo} alt="Logo" className={styles.logo} />
-      </div>
+    <>
+      {/* Hamburger Button (Hidden on Large Screens) */}
+      <button className={styles.hamburger} onClick={toggleSidebar}>
+        {isOpen ? <FaTimes /> : <FaBars />}
+      </button>
+
+      {/* Sidebar */}
+      <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
+        <div className="text-center mb-3">
+          <img src={logo} alt="Logo" className={styles.logo} />
+        </div>
 
       <ul className="nav flex-column">
         {currentRole?.items.map((item, index) => (

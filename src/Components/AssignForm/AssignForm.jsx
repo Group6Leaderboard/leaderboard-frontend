@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./assignForm.module.css";
 import StatsCard from "../RectangleCards/Statscard";
-import { createProject } from "../../services/projectService";
+import { createProject, getAllProjects } from "../../services/projectService";
 import { getAllColleges } from "../../services/collegeService";
-import { getUsers } from "../../services/userService"; // API to fetch mentors
+import { getUsers } from "../../services/userService";
+import { assignProject } from "../../services/studentProjectService";
+import { getAllTasks } from "../../services/taskService";
 
 const AssignForm = ({ role }) => {
   const [colleges, setColleges] = useState([]);
@@ -15,18 +17,63 @@ const AssignForm = ({ role }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [students, setStudents] = useState([]);
   const [currentMemberIndex, setCurrentMemberIndex] = useState(null);
+  const [totalProjects, setTotalProjects] = useState(0);
+  const [totalStudents, setTotalStudents] = useState(0);
+  const [totalMentors, setTotalMentors] = useState(0);
+  const [totalTasks, setTotalTasks] = useState(0);
+  const [submittedTasks, setSubmittedTasks] = useState(0);
+  const [toBeReviewedTasks, setToBeReviewedTasks] = useState(0);
 
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     collegeId: "",
     mentorId: "",
-    members: "",
+    members: [],
     collegeName: "",
     lastDate: ""
   });
 
+
   useEffect(() => {
+
+    const fetchStats = async () => {
+      try {
+ 
+        const tasks = await getAllTasks();
+        setTotalTasks(tasks.response.length);
+
+        const submittedCount = tasks.response.filter(task => task.status === "Not Submitted").length;
+        const toBeReviewedCount = tasks.response.filter(task => task.status.toLowerCase() === "to be reviewed").length;
+
+        setSubmittedTasks(submittedCount);
+        setToBeReviewedTasks(toBeReviewedCount);
+
+        
+
+      } catch (error) {
+        console.error("Error fetching stats", error);
+      }
+    }
+
+    const fetchStatsAdmin = async () => {
+      try {
+
+        const projects = await getAllProjects();
+        setTotalProjects(projects.response.length);
+
+        const studentsResponse = await getUsers("STUDENT");
+        setStudents(studentsResponse.response); 
+        setTotalStudents(studentsResponse.response.length);
+
+       
+        
+
+      } catch (error) {
+        console.error("Error fetching stats", error);
+      }
+    }
+
     const fetchColleges = async () => {
       try {
         const response = await getAllColleges();
@@ -39,15 +86,22 @@ const AssignForm = ({ role }) => {
     const fetchMentors = async () => {
       try {
         const response = await getUsers("MENTOR");
+        setTotalMentors(response.response.length);
         setMentors(response.response || []);
       } catch (error) {
         console.error("Error fetching mentors:", error);
       }
     };
 
+    
+
     if (role === "admin") {
       fetchColleges();
       fetchMentors();
+      fetchStatsAdmin();
+    }
+    else {
+      fetchStats();
     }
   }, [role]);
 
@@ -56,17 +110,18 @@ const AssignForm = ({ role }) => {
       alert("Please select a college first");
       return [];
     }
-  
+
     try {
-      const response = await getUsers("STUDENT");
-      const filteredStudents = response?.response?.filter(student => student.collegeId === String(collegeId)) || [];
+
+      const filteredStudents = students.filter(student => student.collegeId === String(collegeId));
+
       return filteredStudents;
     } catch (error) {
       console.error("Error fetching students:", error);
       return [];
     }
   };
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevData => ({
@@ -80,23 +135,23 @@ const AssignForm = ({ role }) => {
       alert("Please select a college first");
       return;
     }
-  
+
 
     setCurrentMemberIndex(index);
-    
-    // Fetch and filter students for the selected college
+
     const collegeStudents = await fetchStudentsByCollege(selectedCollege);
-    
+
     setStudents(collegeStudents);
     setIsModalOpen(true);
   };
 
-  const handleStudentSelect = (studentEmail) => {
+  const handleStudentSelect = (student) => {
     const updatedMembers = [...members];
-    updatedMembers[currentMemberIndex] = studentEmail;
+    updatedMembers[currentMemberIndex] = { id: student.id, name: student.name }; // Store both ID & name
     setMembers(updatedMembers);
     setIsModalOpen(false);
   };
+
 
   const addMember = () => {
     if (members.length < 4) {
@@ -145,12 +200,25 @@ const AssignForm = ({ role }) => {
           name: formData.name,
           description: formData.description,
           collegeId: selectedCollege,
-          mentorId: selectedMentor,
-          members: members, // Use the correct state
+          mentorId: selectedMentor
         };
-        await createProject(projectData);
-        alert("Project Assigned Successfully");
-        resetForm();
+
+        const response = await createProject(projectData);
+        const projectId = response?.response?.id;
+
+        console.log("Extracted Project ID:", projectId);
+        if (projectId) {
+          await Promise.all(
+            members.map(async (member) => {
+              await assignProject(member.id, projectId);
+            })
+          );
+
+          alert("Project Assigned Successfully");
+          resetForm();
+        } else {
+          throw new Error("Project ID not found in response");
+        }
       } else {
         console.log("No task assignment implemented");
       }
@@ -159,7 +227,8 @@ const AssignForm = ({ role }) => {
       alert(error.message || "Something went wrong");
     }
   };
-  
+
+
 
   const resetForm = () => {
     setFormData({
@@ -174,29 +243,28 @@ const AssignForm = ({ role }) => {
     });
     setSelectedCollege("");
     setSelectedMentor("");
-    setMembers([""]); // Reset members
+    setMembers([""]);
   };
-  
+
   return (
     <div className={styles.container}>
-      {/* Stats Section */}
+
       <div className={styles.statsContainer}>
         {role === "admin" ? (
           <>
-            <StatsCard title="Total Projects" value="15" titleClass={styles.statsTitle} valueClass={styles.statsValue} />
-            <StatsCard title="Total Students" value="120" titleClass={styles.statsTitle} valueClass={styles.statsValue} />
-            <StatsCard title="Total Mentors" value="10" titleClass={styles.statsTitle} valueClass={styles.statsValue} />
+            <StatsCard title="Total Projects" value={totalProjects} titleClass={styles.statsTitle} valueClass={styles.statsValue} />
+            <StatsCard title="Total Students" value={totalStudents} titleClass={styles.statsTitle} valueClass={styles.statsValue} />
+            <StatsCard title="Total Mentors" value={totalMentors} titleClass={styles.statsTitle} valueClass={styles.statsValue} />
           </>
         ) : (
           <>
-            <StatsCard title="Total Tasks" value="30" titleClass={styles.statsTitle} valueClass={styles.statsValue} />
-            <StatsCard title="Submitted" value="20" titleClass={styles.statsTitle} valueClass={styles.statsValue} />
-            <StatsCard title="To Be Reviewed" value="10" titleClass={styles.statsTitle} valueClass={styles.statsValue} />
+            <StatsCard title="Total Tasks" value={totalTasks} titleClass={styles.statsTitle} valueClass={styles.statsValue} />
+            <StatsCard title="Not Submitted" value={submittedTasks} titleClass={styles.statsTitle} valueClass={styles.statsValue} />
+            <StatsCard title="To Be Reviewed" value={toBeReviewedTasks} titleClass={styles.statsTitle} valueClass={styles.statsValue} />
           </>
         )}
       </div>
 
-      {/* Form Section */}
       <div className={styles.formContainer}>
         <h2>{role === "admin" ? "Assign Project" : "Assign Task"}</h2>
         <form onSubmit={handleSubmit}>
@@ -226,8 +294,6 @@ const AssignForm = ({ role }) => {
 
           {role === "admin" ? (
             <>
-              {/* Mentor Selection */}
-              {/* Mentor Selection */}
               <div className={styles.formGroup}>
                 <label>Mentor</label>
                 <div className={styles.selectWrapper}>
@@ -275,42 +341,42 @@ const AssignForm = ({ role }) => {
                 </div>
               </div>
 
-              
-                <div className={styles.formGroup}>
-                  <label>Members</label>
-                  <div className={styles.memberContainer}>
-                    {members.map((member, index) => (
-                      <div key={index} className={styles.memberInputWrapper}>
-                        <input
-                          type="text"
-                          value={member}
-                          onClick={() => handleMemberClick(index)}
-                          readOnly
-                          className={styles.inputBox}
-                          placeholder="Click to select a student"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => removeMember(index)}
-                          className={styles.removeButton}
-                          style={{ display: members.length > 1 ? "flex" : "none" }}
-                        >
-                          ❌
-                        </button>
-                      </div>
-                    ))}
 
-                    {members.length < 4 && (
-                      <div className={styles.lastInputWrapper}>
-                        <button type="button" onClick={addMember} className={styles.addButton}
-                          style={{ flex: "0 0 auto" }}
-                        >
-                          ➕
-                        </button>
-                      </div>
-                    )}
-                  </div>
+              <div className={styles.formGroup}>
+                <label>Members</label>
+                <div className={styles.memberContainer}>
+                  {members.map((member, index) => (
+                    <div key={index} className={styles.memberInputWrapper}>
+                      <input
+                        type="text"
+                        value={member.name}
+                        onClick={() => handleMemberClick(index)}
+                        readOnly
+                        className={styles.inputBox}
+                        placeholder="Click to select a student"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeMember(index)}
+                        className={styles.removeButton}
+                        style={{ display: members.length > 1 ? "flex" : "none" }}
+                      >
+                        ❌
+                      </button>
+                    </div>
+                  ))}
+
+                  {members.length < 4 && (
+                    <div className={styles.lastInputWrapper}>
+                      <button type="button" onClick={addMember} className={styles.addButton}
+                        style={{ flex: "0 0 auto" }}
+                      >
+                        ➕
+                      </button>
+                    </div>
+                  )}
                 </div>
+              </div>
 
             </>
           ) : (
@@ -333,32 +399,30 @@ const AssignForm = ({ role }) => {
         </form>
       </div>
       {isModalOpen && (
-      <div className={styles.modal}>
-        <div className={styles.modalContent}>
-          <h3>Select a Student</h3>
-          {students.length > 0 ? (
-            <ul>
-              {students.map((student) => (
-                <li
-                  key={student.id}
-                  onClick={() => handleStudentSelect(student.name)}
-                >
-                  {student.name} 
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No students found for this college.</p>
-          )}
-          <button onClick={() => setIsModalOpen(false)}>Close</button>
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <h3>Select a Student</h3>
+            {students.length > 0 ? (
+              <ul>
+                {students.map((student) => (
+                  <li key={student.id}
+                    onClick={() => handleStudentSelect(student)}>
+                    {student.name}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No students found for this college.</p>
+            )}
+            <button onClick={() => setIsModalOpen(false)}>Close</button>
+          </div>
         </div>
-      </div>
-    )}
+      )}
     </div>
-    
-  
-);
-  
+
+
+  );
+
 };
 
 
