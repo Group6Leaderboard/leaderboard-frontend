@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
-import "./dashboardMentor.module.css";
+// Import SweetAlert2
+import AlertModal from "../AlertModal/AlertModal";// Assuming you have the AlertModal component
 
 const DashboardMentor = () => {
   // Sample Data
@@ -11,9 +12,25 @@ const DashboardMentor = () => {
 
   const COLORS = ["#5EB5AE", "#FF5733"]; // Green for assigned, Red for unassigned
 
+  const [alertData, setAlertData] = useState({
+    show: false,
+    title: "",
+    message: "",
+  });
+
+  // Function to show alert
+  const showAlert = () => {
+    setAlertData({
+      show: true,
+      title: "Mentor Assignment Status",
+      message: "The mentor assignment status has been updated successfully.",
+    });
+  };
+
   return (
     <div className="mentor-dashboard">
       <h2>Mentor Assignment Status</h2>
+      
       <PieChart width={300} height={300}>
         <Pie
           data={data}
@@ -33,6 +50,19 @@ const DashboardMentor = () => {
         <Tooltip />
         <Legend />
       </PieChart>
+
+      {/* Button to trigger alert */}
+      <button onClick={showAlert}>Show Alert</button>
+
+      {/* Render the AlertModal */}
+      {alertData.show && (
+        <AlertModal
+          show={alertData.show}
+          title={alertData.title}
+          message={alertData.message}
+          onClose={() => setAlertData({ show: false, title: "", message: "" })}
+        />
+      )}
     </div>
   );
 };

@@ -7,11 +7,13 @@ import { GoProjectRoadmap } from "react-icons/go";
 import { IoSchool } from "react-icons/io5";
 import styles from "../Sidebar/sidebar.module.css";
 import logo from "../../assets/inspiro-logo.png";
-
+ 
 const Sidebar = () => {
   const location = useLocation();
-  const [selectedIndex, setSelectedIndex] = useState(null);
-
+  const [isOpen, setIsOpen] = useState(false);
+ 
+  const toggleSidebar = () => setIsOpen(!isOpen);
+ 
   const sidebarItems = [
     { role: "/admin", items: [
       { name: "Dashboard", path: "/admin", icon: <MdDashboard /> },
@@ -38,42 +40,43 @@ const Sidebar = () => {
       { name: "Leaderboard", path: "/college/leaderboard", icon: <MdLeaderboard /> }
     ]}
   ];
-
+ 
   const currentRole = sidebarItems.find((role) => location.pathname.startsWith(role.role));
-
-  const handleClick = (index) => {
-    setSelectedIndex(index);
-  };
-
+ 
   return (
     <>
       {/* Hamburger Button (Hidden on Large Screens) */}
       <button className={styles.hamburger} onClick={toggleSidebar}>
         {isOpen ? <FaTimes /> : <FaBars />}
       </button>
-
+ 
       {/* Sidebar */}
       <div className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}>
         <div className="text-center mb-3">
           <img src={logo} alt="Logo" className={styles.logo} />
         </div>
-
-      <ul className="nav flex-column">
-        {currentRole?.items.map((item, index) => (
-          <li key={index} className={`nav-item ${selectedIndex === index ? styles.selected : ""}`} onClick={() => handleClick(index)}>
-            <Link to={item.path} className={`nav-link d-flex align-items-center ${styles.navLink} ${location.pathname === item.path ? styles.active : ""}`}>
-              <div className={`d-flex align-items-center ${styles.iconWrapper}`}>
-                {item.icon}
-                {selectedIndex === index && <span className={styles.jumpEffect}></span>}
-              </div>
-              <span className={styles.linkText}>{item.name}</span>
-              {location.pathname === item.path && <FaChevronRight className={styles.arrowIcon} />}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+ 
+        <ul className="nav flex-column">
+          {currentRole?.items.map((item, index) => (
+            <li key={index} className="nav-item">
+              <Link
+                to={item.path}
+                className={`nav-link d-flex align-items-center justify-content-between ${styles.navLink} ${
+                  location.pathname === item.path ? styles.active : ""
+                }`}
+                onClick={() => setIsOpen(false)} // Close sidebar on click
+              >
+                <div className="d-flex align-items-center">
+                  {item.icon} <span className="ms-2">{item.name}</span>
+                </div>
+                {location.pathname === item.path && <FaChevronRight className={styles.arrowIcon} />}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
-
+ 
 export default Sidebar;

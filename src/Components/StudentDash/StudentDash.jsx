@@ -98,7 +98,7 @@ const StudentDash = () => {
         {/* Chart Section */}
         <div className={styles.chartContainer}>
           <h2>Performance Over Time</h2>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={420}>
             <LineChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
@@ -111,7 +111,7 @@ const StudentDash = () => {
         </div>
 
         {/* Leaderboard Card */}
-        <div className={styles.leaderboardCard}>
+        <div className="leaderboardCard">
           <LeaderboardCard title="Student Leaderboard" />
           <LeaderboardCard title="Project Leaderboard" />
         </div>

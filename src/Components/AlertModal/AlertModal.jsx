@@ -1,18 +1,26 @@
-import React from "react";
-import "./alertModal.module.css";
+import React, { useEffect } from "react";
+import Swal from "sweetalert2";
 
 const AlertModal = ({ show, onClose, title, message }) => {
-  if (!show) return null; 
+  useEffect(() => {
+    if (show) {
+      Swal.fire({
+        title: title,
+        text: message,
+        icon: "info", // Can be 'success', 'error', 'warning', 'info', or 'question'
+        confirmButtonColor: "#5EB5AE",
+        confirmButtonText: "OK",
+        customClass: {
+          popup: "swal-custom-popup",
+        },
+        showCloseButton: true,
+      }).then(() => {
+        onClose(); // Call onClose when the user closes the alert
+      });
+    }
+  }, [show, title, message, onClose]);
 
-  return (
-    <div className="alert-overlay">
-      <div className="alert-box">
-        <h3 className="alert-title">{title}</h3>
-        <p className="alert-message">{message}</p>
-        <button className="alert-close-btn" onClick={onClose}>Close</button>
-      </div>
-    </div>
-  );
+  return null; // No need to return any JSX, SweetAlert2 handles the UI
 };
 
 export default AlertModal;

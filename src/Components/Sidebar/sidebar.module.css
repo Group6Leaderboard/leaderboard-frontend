@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;700&display=swap");
-
+ 
 .sidebar {
     width: 250px;
     background-color: white;
@@ -10,9 +10,60 @@
     flex-direction: column;
     height: 100vh;
     padding: 20px;
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
 }
-
+ 
+/* Sidebar should always be visible on large screens */
+@media (min-width: 1025px) {
+    .sidebar {
+        transform: translateX(0) !important;
+    }
+}
+ 
+/* Hide Sidebar by default on small screens */
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        height: 100vh;
+        background: white;
+    }
+ 
+    .sidebar.open {
+        transform: translateX(0);
+    }
+}
+ 
+/* Hamburger Button */
+.hamburger {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1100;
+    display: none;
+}
+ 
+/* Show Hamburger only on small screens */
+@media (max-width: 1024px) {
+    .hamburger {
+        display: block;
+    }
+}
+ 
+ul, ol {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+ 
 .logo {
     width: 150px;
     height: auto;
@@ -20,19 +71,19 @@
     display: block;
     margin: 0 auto 20px auto;
 }
-
+ 
 .nav {
   list-style: none !important;
   padding: 0;
   margin: 0;
 }
-
+ 
 .nav-item {
+  list-style: none !important;
   display: flex;
   align-items: center;
-  position: relative;
 }
-
+ 
 .navLink {
     display: flex;
     align-items: center;
@@ -40,90 +91,46 @@
     padding: 12px 15px;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
-    text-decoration: none; 
+    text-decoration: none;
     font-size: 16px;
     font-weight: 500;
 }
-
+ 
 .navLink:hover {
     background-color: #ebf0f3;
     padding-left: 18px;
 }
-
-/* .active {
+ 
+.active {
     font-weight: bold;
     color: #5EB5AE !important;
     background-color: rgba(94, 181, 174, 0.1);
-} */
-
+}
+ 
 .navLink svg {
     font-size: 20px;
     margin-right: 10px;
 }
-
+ 
 .arrowIcon {
     color: #5EB5AE;
     transition: transform 0.3s ease-in-out;
     font-size: 14px;
     margin-left: auto;
 }
-
-/* Special Effect for Mobile */
-@media (max-width: 1024px) {
-    .sidebar {
-        width: 70px;
-        padding: 10px;
-        align-items: center;
-    }
-    
+ 
+/* Responsive Styles */
+@media (max-width: 768px) {
     .logo {
-        width: 50px;
-        margin-bottom: 10px;
+        width: 120px;
     }
-
-    .nav-item {
-        position: relative;
-        width: 100%;
-        text-align: center;
+ 
+    .navLink {
+        font-size: 14px;
+        padding: 10px;
     }
-
-    .iconWrapper {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        transition: all 0.3s ease-in-out;
-        margin: 0 auto;
-    }
-
-    .selected .iconWrapper {
-        background-color: #ffffff;
-        transform: scale(1.2);
-        box-shadow: 0px 5px 15px rgba(94, 181, 174, 0.5);
-    }
-
-    .jumpEffect {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        width: 10px;
-        height: 10px;
-  
-        border-radius: 50%;
-        animation: jumpAnimation 0.3s ease-in-out;
-    }
-
-    @keyframes jumpAnimation {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0); }
-    }
-
-    /* Hides text on mobile */
-    .linkText {
-        display: none;
+ 
+    .navLink svg {
+        font-size: 18px;
     }
 }
