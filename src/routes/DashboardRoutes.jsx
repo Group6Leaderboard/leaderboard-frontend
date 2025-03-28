@@ -37,7 +37,6 @@ const DashboardRoutes = () => {
 
         {/* College Routes */}
         <Route path="/college" element={<CollegeDashboard />} />
-        <Route path="/college/*" element={<NotFound />} /> {/* Handles invalid college routes */}
 
         {/* Catch-All for Any Invalid Route */}
         <Route path="*" element={<NotFound />} />

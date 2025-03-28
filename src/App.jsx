@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import DashboardRoutes from "./routes/DashboardRoutes";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import AppRoutes from "./routes/AppRoutes";
-import NotFound from "./Components/NotFound/NotFound"; // Import NotFound
+import NotFound from "./Components/NotFound/NotFound"; 
 
 const App = () => {
   return (

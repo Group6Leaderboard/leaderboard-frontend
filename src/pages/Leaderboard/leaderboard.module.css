@@ -1,149 +1,251 @@
+/* Container for the whole page */
 .container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-    font-family: 'Inknut Antiqua', serif;
-}
-
-.title {
-    font-size: 32px;
-    font-weight: bold;
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-/* Stats Cards */
-.stats {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.card {
-    flex: 1;
-    padding: 20px;
-    border-radius: 10px;
-    background: #b9dddb;
     text-align: center;
-    font-weight: bold;
-}
-
-.highlighted {
-    background: #b9dddb;
-}
-
-.card h2 {
-    font-size: 24px;
-    margin-top: 5px;
-}
-
-/* Current Leaders Section */
-.sectionTitle {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.leaders {
+    padding: 20px;
+    font-family: "Poppins", sans-serif;
+    background-image: url('/z.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; 
+  }
+  
+  /* Title Styling */
+  .title {
+    font-size: 2rem;
+    color: #eed46e;
+    text-shadow: 2px 2px #d5cb93;
+  }
+  
+  /* Navbar Styling */
+  .navbar {
     display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.leaderCard {
-    display: flex;
-    align-items: center;
-    background: #90e7f3;
-    padding: 15px;
+    justify-content: center;
+    gap: 25px; /* Increased gap for better spacing */
+    margin-top: 20px;
+    margin-bottom: 30px;
+    background-color: rgba(252, 252, 252, 0);
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .navbar a {
+    text-decoration: none; /* Remove underline */
+    font-size: 1.2rem; /* Restore text size */
+    color: white;
+    padding: 10px 15px; /* Ensure proper spacing */
     border-radius: 10px;
-    flex: 1;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .navbar button {
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-transform: uppercase;
+    border-radius: 10px;  /* Rounded edges */
+  }
+  
+  .navbar button:hover {
+    background-color: #fcdc5d;
+    color: #ffffff;
+  }
+  
+  .active {
+    background-color: #ffbb00;
+
+    
+  }
+  .navbar .active {
+    background-color: #ffbb00;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  /* Hover effect */
+.navbar a:hover {
+    background-color: #fcdc5d;
+    color: #ffffff;
+  }
+  
+  
+  /* Section title styling */
+  .sectionTitle {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin: 20px 0;
+  }
+  
+  /* Leader Cards */
+  .leaders {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+  }
+  
+  .leaderCard {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+    width: 220px;
+    box-shadow: 0px 4px 6px rgba(16, 12, 12, 0.1);
+    text-align: center;
+    border: 2px solid #c5b53d;
+  }
+  .first {
+    background-image: url('/gold.png'); /* Change this to your actual image */
 }
 
-.leaderCard img {
+/* Second Leader (Silver) */
+.second {
+    background-image: url('/silverr.png'); /* Change this to your actual image */
+}
+
+/* Third Leader (Bronze) */
+.third {
+    background-image: url('/brons.png'); 
+    
+}
+  
+.leaderImage {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-right: 15px;
+    margin-bottom: 15px;
 }
-
-.leaderCard h3 {
-    margin: 0;
-    font-size: 18px;
-}
-
-.leaderCard p {
-    font-size: 16px;
-    font-weight: bold;
-    color: #555;
-}
-
-.statsRow {
-    display: flex;
-    gap: 10px;
-    font-size: 14px;
-    color: #777;
-}
-
-/* Filters */
-.filters {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.filters button {
-    padding: 8px 15px;
-    border: none;
-    background: #f0f0f0;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.filters button.activeFilter {
-    background: #007bff;
-    color: white;
-}
-.searchContainer {
-    display: flex;
-    align-items: center;
-    background: white;
-    border: 1px solid #ddd;
-    padding: 5px 10px;
-    border-radius: 5px;
+  .leaderCard h3 {
+    font-size: 1.2rem;
+    color: #ffffff;
   }
   
-  .searchIcon {
-    color: gray;
-    margin-right: 5px;
+  .leaderCard p {
+    font-size: 1rem;
+    color: #ffffff;
   }
   
-  .searchContainer input {
-    border: none;
-    outline: none;
-    font-size: 14px;
+  .statsRow {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #ffffff;
   }
-/* Ranking Table */
+  
+ /* Table Container */
 .tableContainer {
-    width: 100%;
-    background: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin: auto;
+    overflow-x: auto;
 }
 
+/* Make the table semi-transparent */
 table {
     width: 100%;
     border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.15); /* Light transparent white */
+    backdrop-filter: blur(2px); /* Adds a slight blur effect */
 }
 
+/* Table Headers */
 th, td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light transparent border */
     text-align: center;
+    color: white; /* Ensures text is readable */
 }
 
+/* Header row styling */
 th {
-    background: #f8f9fa;
-    font-weight: bold;
+    background: rgba(0, 0, 0, 0.8); /* Darker semi-transparent background */
+    color: white;
 }
+
+/* Alternate row styling */
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.1); /* Light transparent row */
+}
+
+/* Table Row Hover Effect */
+tr:hover {
+    border: 2px solid #c5b53d; /* Gold border when hovered */
+    background: rgba(255, 255, 255, 0.2); /* Slight highlight */
+}
+
+/* Adjust for Mobile Phones */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: center; /* Ensures all options are centered */
+        gap: 5px;
+    }
+
+    .navbar a, .navbar button {
+        font-size: 0.9rem;
+        padding: 8px;
+        width: fit-content; /* Only as wide as its content */
+        display: inline-block; /* Prevents flexbox from stretching */
+        text-align: center;
+    }
+
+    .navbar .active {
+        width: fit-content; /* Ensures it fits content */
+        display: inline-block; /* Keeps it from stretching */
+        text-align: center;
+    }
+
+
+    .leaders {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .leaderCard {
+        width: 90%;
+        max-width: 280px;
+        padding: 15px;
+    }
+    .first, .second, .third {
+        background-size: 60% auto; 
+        background-position: center;
+    }
+
+    .leaderImage {
+        width: 40px;
+        height: 40px;
+    }
+
+    .leaderCard h3 {
+        font-size: 1rem;
+    }
+
+    .leaderCard p {
+        font-size: 0.9rem;
+    }
+
+    .tableContainer {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+}
+  

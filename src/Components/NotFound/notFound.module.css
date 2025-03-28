@@ -50,15 +50,17 @@ h1 {
 }
 
 .homeLink {
-  text-decoration: none;
+  text-decoration: none;  /* Removes underline */
   color: white;
   background-color: #000000;
   padding: 10px 20px;
   border-radius: 5px;
   margin-top: 50px;
   transition: background-color 0.3s ease-in-out;
+  display: inline-block;  /* Ensures it behaves like a button */
 }
 
 .homeLink:hover {
   background-color: #5EB5AE;
+  text-decoration: none;  /* Prevents underline from reappearing */
 }
